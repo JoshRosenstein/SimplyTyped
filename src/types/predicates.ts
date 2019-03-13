@@ -20,10 +20,7 @@ export type IsType<T, X> = X extends T ? True : False;
 export type IsArray<T> = T extends unknown[] ? True : False;
 export type IsNumber<T> = T extends number ? True : False;
 export type IsString<T> = T extends string ? True : False;
-export type IsFunction<T> =
-    Or<
-        T extends Function ? True : False,
-        T extends Function ? True : False>;
+export type IsFunction<T> = T extends Function ? True : False;
 
 export type IsStringFunction<T extends string> = And<IsString<T>, IsNever<T>>;
 export type IsBoolean<T> = T extends boolean ? True : False;
@@ -37,13 +34,4 @@ export type IsObject<T> = And<
     Not<IsArray<T>>>
 >;
 
-// hmm...
-export type IsAny<T> =
-    And<Not<IsArray<T>>,
-    And<Not<IsBoolean<T>>,
-    And<Not<IsNumber<T>>,
-    And<Not<IsString<T>>,
-    And<Not<IsFunction<T>>,
-    And<Not<IsNil<T>>,
-    Not<IsObject<T>>>>>>>
->;
+export type IsAny<T> = unknown extends T ? True : False;
